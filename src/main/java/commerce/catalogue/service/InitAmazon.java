@@ -44,6 +44,7 @@ public class InitAmazon {
 	}
 
 	public void init() {
+		
 		// Lien pour obtenir la clé d'accès et la clé secrète auprès d'Amazon.
 		// https://portal.aws.amazon.com/gp/aws/securityCredentials
 		/*

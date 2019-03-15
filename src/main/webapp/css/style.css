@@ -1676,8 +1676,6 @@ hr {
 input,
 textarea {
   padding: 8px;
-  margin: 0px;
-  height: 35px;
   background: #fff;
   border-color: #efefef;
   border-width: 0px;
