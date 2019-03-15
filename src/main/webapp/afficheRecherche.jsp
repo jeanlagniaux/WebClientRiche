@@ -27,6 +27,12 @@
 				un article</a>
 		</li>
 		<li id="menu-item-290"
+			class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item">
+			 <form id"form_id" action="<%=response.encodeURL("./afficheRecherche.jsp")%>" method="post"> 
+			 <input id="text_id" type="text" name="champFormHtmlTexte" size="40" />
+			 <input id="_submit_id" type="submit" value="Rechercher" /></form>
+		</li>
+		<li id="menu-item-290"
 			class="menu-item menu-item-type-custom menu-item-object-custom">
 			<a href="<%=response.encodeURL("./controlePanier.jsp")%>">Panier</a>
 		</li>

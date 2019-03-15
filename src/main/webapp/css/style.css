@@ -1675,10 +1675,10 @@ hr {
 
 input,
 textarea {
-  padding: 5px;
+  padding: 8px;
   background: #fff;
   border-color: #efefef;
-  border-width: 2px;
+  border-width: 0px;
   border-style: solid;
   margin-bottom: 10px;
   border-radius: 3px;
