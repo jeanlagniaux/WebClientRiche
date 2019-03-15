@@ -8,6 +8,8 @@
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.List"%>
 <%
+
+out.print(request.getParameter("champFormHtmlTexte")) ;
 	if (session.getAttribute("panier")==null) {
 		response.sendRedirect("./index.jsp");
 	} else {
@@ -28,7 +30,7 @@
 		</li>
 		<li id="menu-item-290"
 			class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item">
-			 <form id"form_id" action="<%=response.encodeURL("./afficheRecherche.jsp")%>" method="post"> 
+			 <form id"form_id" action="<%=response.encodeURL("./afficheRecherche.jsp")%>" method="get"> 
 			 <input id="text_id" type="text" name="champFormHtmlTexte" size="40" />
 			 <input id="_submit_id" type="submit" value="Rechercher" /></form>
 		</li>

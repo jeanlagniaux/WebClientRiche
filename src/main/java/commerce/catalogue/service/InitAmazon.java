@@ -72,7 +72,7 @@ public class InitAmazon {
 		Search search = new Search();
 		search.setCategory("Music");
 		search.setResponseGroup("Offers,ItemAttributes,Images") ;
-		String keywords = "Ibrahim Maalouf" ;
+		String keywords = "Daft Punk" ;
 		search.setKeywords(keywords);
 
 		Livre livre ;
@@ -203,4 +203,5 @@ public class InitAmazon {
 			e.printStackTrace() ;
 		}
 	}
+	
 }
