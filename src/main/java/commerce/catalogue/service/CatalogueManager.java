@@ -38,8 +38,14 @@ public class CatalogueManager {
 	}
 	
 	public void supprimerToutLesArticles() {
-		for(int i = 0; i<articles.size(); i++) {
-		articles.remove(i);
+		try {
+			List articles = getArticles();
+			
+			for(int i = 0; i<articles.size(); i++) {
+				this.supprimerArticleParRef(((Article) articles.get(i)).getRefArticle());
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

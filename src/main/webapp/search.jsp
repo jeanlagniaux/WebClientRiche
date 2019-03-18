@@ -14,6 +14,7 @@
 		}
 	
 		catalogueManager.supprimerToutLesArticles();
+		
 		String search_text = request.getParameter("search");
 		InitAmazon amazon = new InitAmazon(catalogueManager, search_text);
 		amazon.init();

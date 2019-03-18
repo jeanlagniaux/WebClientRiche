@@ -65,6 +65,7 @@ public class InitAmazon {
 		 *      JP: ecs.amazonaws.jp
 		 */
 		//String ENDPOINT = "ecs.amazonaws.fr" ; 
+		
 		String ENDPOINT = "odp.tuxfamily.org";
 		String AWS_ACCESS_KEY_ID = "YOUR_ACCESS_KEY_ID_HERE";
 		String AWS_SECRET_KEY = "YOUR_SECRET_KEY_HERE";
