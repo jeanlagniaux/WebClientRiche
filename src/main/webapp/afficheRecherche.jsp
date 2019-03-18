@@ -9,12 +9,14 @@
 <%@ page import="java.util.List"%>
 <%
 
-out.print(request.getParameter("champFormHtmlTexte")) ;
+//out.print(request.getParameter("champFormHtmlTexte")) ;
+
 	if (session.getAttribute("panier")==null) {
 		response.sendRedirect("./index.jsp");
 	} else {
 		CatalogueManager catalogueManager = (CatalogueManager) application
 									.getAttribute("catalogueManager");
+		
 		List<Article> articles = catalogueManager.getArticles();
 		Iterator<Article> listeDesArticles ;
 		Livre livre = null;
@@ -23,20 +25,22 @@ out.print(request.getParameter("champFormHtmlTexte")) ;
 %>
 <nav id="navigation" class="col-full" role="navigation">
 	<ul id="main-nav" class="nav fl">
+<!-- 		<li id="menu-item-290" -->
+<!-- 			class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item"> -->
+<%-- 			<a href="<%=response.encodeURL("./afficheRecherche.jsp")%>">Rechercher --%>
+<!-- 				un article</a> -->
+<!-- 		</li> -->
 		<li id="menu-item-290"
 			class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item">
-			<a href="<%=response.encodeURL("./afficheRecherche.jsp")%>">Rechercher
-				un article</a>
-		</li>
-		<li id="menu-item-290"
-			class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item">
-			 <form id"form_id" action="<%=response.encodeURL("./afficheRecherche.jsp")%>" method="get"> 
-			 <input id="text_id" type="text" name="champFormHtmlTexte" size="40" />
+			 <form id="form_id" action="<%=response.encodeURL("./search.jsp")%>" method="get"> 
+			 <input id="text_id" type="text" name="search" placeholder="votre article " size="30" maxlength="10" />
 			 <input id="_submit_id" type="submit" value="Rechercher" /></form>
 		</li>
+		
 		<li id="menu-item-290"
 			class="menu-item menu-item-type-custom menu-item-object-custom">
-			<a href="<%=response.encodeURL("./controlePanier.jsp")%>">Panier</a>
+			<a style="margin-top:2px" href="<%=response.encodeURL("./controlePanier.jsp")%>">Panier</a>
+			
 		</li>
 	</ul>
 </nav>

@@ -39,8 +39,15 @@ public class InitAmazon {
 
 	private CatalogueManager catalogueManager ;
 
+	private String keywords;
+	
 	public InitAmazon(CatalogueManager catalogueManager) {
 		this.catalogueManager = catalogueManager ;
+	}
+	
+	public InitAmazon(CatalogueManager catalogueManager, String keywords) {
+		this.catalogueManager = catalogueManager ;
+		this.keywords = keywords;
 	}
 
 	public void init() {
@@ -73,7 +80,7 @@ public class InitAmazon {
 		Search search = new Search();
 		search.setCategory("Music");
 		search.setResponseGroup("Offers,ItemAttributes,Images") ;
-		String keywords = "Daft Punk" ;
+		//String keywords = "Booba" ;
 		search.setKeywords(keywords);
 
 		Livre livre ;
