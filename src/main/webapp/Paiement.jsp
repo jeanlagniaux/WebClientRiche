@@ -93,6 +93,9 @@
 						</tbody>
 					</table>
 				</form>
+				
+
+
 				<div class="cart-collaterals">
 					<div class="cross-sells"></div>
 					<div class="cart_totals ">
