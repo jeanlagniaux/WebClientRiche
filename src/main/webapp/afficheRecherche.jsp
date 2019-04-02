@@ -20,6 +20,9 @@
 		Livre livre = null;
 		Musique musique = null;
 		Article article;
+		String result = "Resultat de la recherche ";
+		if( articles.size() == 0)
+			result = "Aucun Resultat Trouve";
 %>
 
 <div class="mysearch">
@@ -36,7 +39,7 @@
 	<div class="col-full">
 		<div class="primary" class="content-area">
 			<section id="main" class="site-main" role="main">
-				<h1 class="page-title">Résultats de la recherche</h1>
+				<h1 class="page-title"><%=result %></h1>
 				<ul class="products">
 					<%
 							listeDesArticles = articles.iterator() ;
