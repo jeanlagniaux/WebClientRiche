@@ -40,7 +40,7 @@ public class InitAmazon {
 	private CatalogueManager catalogueManager ;
 
 	private String keywords;
-	
+		
 	public InitAmazon(CatalogueManager catalogueManager) {
 		this.catalogueManager = catalogueManager ;
 	}

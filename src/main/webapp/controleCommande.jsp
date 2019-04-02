@@ -10,9 +10,13 @@
 		response.sendRedirect("./index.jsp");
 	} else {
 		Panier lePanier = (Panier) session.getAttribute("panier");
-		CatalogueManager catalogueManager = (CatalogueManager) application
-				.getAttribute("catalogueManager");
+		CatalogueManager catalogueManager = (CatalogueManager) application.getAttribute("catalogueManager");
 %>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+
 <nav id="navigation" class="col-full" role="navigation">
 	<ul id="main-nav" class="nav fl">
 		<li id="menu-item-290"
@@ -27,20 +31,18 @@
 	</ul>
 </nav>
 <div class="cart-totals">
-<h2>Recapitulatif de votre commande</h2>
+	<h2>Recapitulatif de votre commande</h2>
 </div>
 <div id="content" class="col-full">
 	<div id="main-sidebar-container">
 		<section class="entry">
 			<div class="woocommerce">
 				<form
-					action="<%=response
-							.encodeURL("controlePanier.jsp?commande=recalculerPanier")%>"
+					action="<%=response.encodeURL("controlePanier.jsp?commande=recalculerPanier")%>"
 					name="panier" method="post">
 					<table class="shop_table cart" cellspacing="0">
 						<thead>
 							<tr>
-								<th class="product-remove"></th>
 								<th class="product-thumbnail"></th>
 								<th class="product-name">Produit</th>
 								<th class="product-price">Prix</th>
@@ -50,31 +52,30 @@
 						</thead>
 						<%
 							Iterator it;
-							Article unArticle;
-							it = lePanier.getLignesPanier().iterator();
-									LignePanier uneLignePanier;
-									while (it.hasNext()) {
-										uneLignePanier = (LignePanier) it.next();
-										unArticle = uneLignePanier.getArticle();
+								Article unArticle;
+								it = lePanier.getLignesPanier().iterator();
+								LignePanier uneLignePanier;
+								while (it.hasNext()) {
+									uneLignePanier = (LignePanier) it.next();
+									unArticle = uneLignePanier.getArticle();
 						%>
 						<tbody>
 							<tr class="cart_item">
-								
+
 								<td class="product-thumbnail"><img
 									class="attachment-shop_thumbnail wp-post-image" width="145"
 									height="145" alt="hoodie_4_front"
-									src="<% if (unArticle.getImage().startsWith("http")) 
-									    out.print(unArticle.getImage()) ;
-							        else
-							        	out.print("./images/"+unArticle.getImage()) ; %>"/></td>
+									src="<%if (unArticle.getImage().startsWith("http"))
+						out.print(unArticle.getImage());
+					else
+						out.print("./images/" + unArticle.getImage());%>" /></td>
 								<td class="product-name"><%=unArticle.getTitre()%></td>
 								<td class="product-price"><span class="amount"><%=uneLignePanier.getPrixUnitaire()%>€</span></td>
 								<td class="product-quantity">
 									<div class="quantity">
-										<input class="input-text qty text" type="number" size="4"
-											title="Qty" value="<%=uneLignePanier.getQuantite()%>"
-											name="cart[<%=uneLignePanier.getArticle().getRefArticle()%>][qty]"
-											min="1" step="1">
+										<p class="text qty text">
+											<%=uneLignePanier.getQuantite()%>
+										</p>
 									</div>
 								</td>
 								<td class="product-subtotal"><span class="amount"><%=uneLignePanier.getPrixTotal()%>€</span></td>
@@ -82,7 +83,7 @@
 							<%
 								}
 							%>
-							
+
 						</tbody>
 					</table>
 				</form>
@@ -97,7 +98,7 @@
 									<td><span class="amount"><%=lePanier.getTotal()%>€</span></td>
 								</tr>
 								<tr class="shipping">
-									<th>Frait de port</th>
+									<th>Frais de port</th>
 									<td>Gratuit</td>
 								</tr>
 								<tr class="order-total">
@@ -107,21 +108,62 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="wc-proceed-to-checkout">
-							<a
-								href="<%=response
-							.encodeURL("./Paiement.jsp")%>"
-								class="checkout-button button alt wc-forward">PAYER LA COMMANDE</a>
-						</div>
-					
+
+						
+						
+						<div id="paypal-button-container"></div>
+
+						<!-- Include the PayPal JavaScript SDK -->
+						<script
+							src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
+						<script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '<%=lePanier.getTotal()%>
+							'
+																	}
+																} ]
+															});
+												},
+
+												// Finalize the transaction
+												onApprove : function(data,
+														actions) {
+													return actions.order
+															.capture()
+															.then(
+																	function(
+																			details) {
+																		// Show a success message to the buyer
+																		alert('Transaction completed by '
+																				+ details.payer.name.given_name
+																				+ '!');
+																	});
+												}
+
+											}).render(
+											'#paypal-button-container');
+						</script>
+
+
+
+
 					</div>
 				</div>
 			</div>
 		</section>
 	</div>
 </div>
-</div>
+
 <%
 	}
 %>
 <%@ include file="piedDePage.html"%>
+
+
