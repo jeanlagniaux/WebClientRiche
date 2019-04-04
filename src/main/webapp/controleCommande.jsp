@@ -15,6 +15,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel='stylesheet' href='http://www.adobewordpress.com/wp-content/themes/sparkling/inc/css/font-awesome.min.css' type='text/css' media='all' />
 </head>
 
 
@@ -99,8 +100,8 @@
 							</tbody>
 						</table>
 
-						
-						
+
+
 						<div id="paypal-button-container"></div>
 
 						<!-- Include the PayPal JavaScript SDK -->
@@ -116,6 +117,8 @@
                     purchase_units: [{
                         amount: {
                             value: '<%=lePanier.getTotal()%>'
+							
+
 																	}
 																} ]
 															});
@@ -140,9 +143,19 @@
 											'#paypal-button-container');
 						</script>
 
+						<div class="wrapperButtonControl">
+  							<button class='buton buton-saga'>
+    						<span><i class="fa fa-chevron-right"></i> Imprimer le récapitulatif </span>
+  							</button>
+						</div>
 
-
-
+						<script>
+							$('.wrapperButtonControl').on('click', function() {
+								window.print();
+								return false; // why false?
+							});
+						</script>
+						
 					</div>
 				</div>
 			</div>

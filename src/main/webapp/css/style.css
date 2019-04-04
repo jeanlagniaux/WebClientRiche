@@ -6243,3 +6243,51 @@ body.search .portfolio .portfolio-img {
 	color:#555;
 	margin-right:10px;
 }
+
+.wrapperButtonControl{
+  display:table; 
+  margin:15px auto;
+}
+
+
+.buton {
+  position: relative;
+  border: 0;
+  font:300 14px 'Open Sans';
+  color: #FFFFFF;
+  padding: 10px 15px;
+  border-radius:3px;
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+  overflow: hidden;
+  outline:none;
+  background: -webkit-linear-gradient(left, #2a83be 40px, #3498db 0);
+}
+
+.buton > span > i.fa{
+  margin-right:20px;
+}
+.buton > * {
+  position: relative;
+  z-index: 5;
+}
+
+.buton-saga:after, .buton-sola:after, .buton-yukari:after, .buton-asagi:after{
+  position: absolute;
+  background: #2a83be;
+  width: 100%;
+  height: 100%;
+  content: "";
+  -webkit-transition: 1s cubic-bezier(0.165, 0.85, 0.45, 1);
+  transition: 1s cubic-bezier(0.165, 0.85, 0.45, 1);
+}
+
+.buton-saga:hover:after {
+  left: 0;
+}
+
+.buton-saga:after {
+  top: 0;
+  left: -100%;
+}

@@ -10,8 +10,7 @@
 		response.sendRedirect("./index.jsp");
 	} else {
 		Panier lePanier = (Panier) session.getAttribute("panier");
-		CatalogueManager catalogueManager = (CatalogueManager) application
-				.getAttribute("catalogueManager");
+		CatalogueManager catalogueManager = (CatalogueManager) application.getAttribute("catalogueManager");
 %>
 
 <div id="content" class="col-full">
@@ -19,8 +18,7 @@
 		<section class="entry">
 			<div class="woocommerce">
 				<form
-					action="<%=response
-							.encodeURL("controlePanier.jsp?commande=recalculerPanier")%>"
+					action="<%=response.encodeURL("controlePanier.jsp?commande=recalculerPanier")%>"
 					name="panier" method="post">
 					<table class="shop_table cart" cellspacing="0">
 						<thead>
@@ -35,39 +33,46 @@
 						</thead>
 						<%
 							Iterator it;
-							Article unArticle;
-							it = lePanier.getLignesPanier().iterator();
-									LignePanier uneLignePanier;
-									while (it.hasNext()) {
-										uneLignePanier = (LignePanier) it.next();
-										unArticle = uneLignePanier.getArticle();
+								Article unArticle;
+								it = lePanier.getLignesPanier().iterator();
+								LignePanier uneLignePanier;
+								while (it.hasNext()) {
+									uneLignePanier = (LignePanier) it.next();
+									unArticle = uneLignePanier.getArticle();
 						%>
 						<tbody>
 							<tr class="cart_item">
 								<td class="product-remove"><a class="remove"
 									title="Remove this item"
-									href="<%=response
-								.encodeURL("./controlePanier.jsp?refArticle="
-										+ uneLignePanier.getArticle()
-												.getRefArticle()
-										+ "&amp;commande=supprimerLigne")%>">×</a>
+									href="<%=response.encodeURL("./controlePanier.jsp?refArticle="
+							+ uneLignePanier.getArticle().getRefArticle() + "&amp;commande=supprimerLigne")%>">×</a>
 								</td>
 								<td class="product-thumbnail"><img
 									class="attachment-shop_thumbnail wp-post-image" width="145"
 									height="145" alt="hoodie_4_front"
-									src="<% if (unArticle.getImage().startsWith("http")) 
-									    out.print(unArticle.getImage()) ;
-							        else
-							        	out.print("./images/"+unArticle.getImage()) ; %>"/></td>
+									src="<%if (unArticle.getImage().startsWith("http"))
+						out.print(unArticle.getImage());
+					else
+						out.print("./images/" + unArticle.getImage());%>" /></td>
 								<td class="product-name"><%=unArticle.getTitre()%></td>
 								<td class="product-price"><span class="amount"><%=uneLignePanier.getPrixUnitaire()%>€</span></td>
 								<td class="product-quantity">
+
 									<div class="quantity">
-										<input class="input-text qty text" type="number" size="4"
+										<input class="input-text qty text" type="number" size="4" 
 											title="Qty" value="<%=uneLignePanier.getQuantite()%>"
 											name="cart[<%=uneLignePanier.getArticle().getRefArticle()%>][qty]"
 											min="1" step="1">
 									</div>
+									 
+								
+									<script> 
+									$('.quantity').on('change', function() {
+										$('input[type="submit"]').trigger('click');
+									});
+									
+ 									</script> 
+
 								</td>
 								<td class="product-subtotal"><span class="amount"><%=uneLignePanier.getPrixTotal()%>€</span></td>
 							</tr>
@@ -75,7 +80,7 @@
 								}
 							%>
 							<tr>
-								<td class="actions" colspan="6"><input class="button"
+								<td class="actions" colspan="6"><input id="iden" class="button"
 									type="submit" value="Mise à jour du panier" name="update_cart" /></td>
 							</tr>
 						</tbody>
@@ -103,16 +108,13 @@
 							</tbody>
 						</table>
 						<div class="wc-proceed-to-checkout">
-							<a
-								href="<%=response
-							.encodeURL("./form.jsp")%>"
+							<a href="<%=response.encodeURL("./form.jsp")%>"
 								class="checkout-button button alt wc-forward">Effectuer la
 								commande</a>
 						</div>
 						<div class="wc-proceed-to-checkout">
 							<a
-								href="<%=response
-							.encodeURL("./controlePanier.jsp?commande=viderPanier")%>"
+								href="<%=response.encodeURL("./controlePanier.jsp?commande=viderPanier")%>"
 								class="checkout-button button alt">Vider le panier</a>
 						</div>
 					</div>
