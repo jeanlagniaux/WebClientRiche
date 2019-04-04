@@ -1,3 +1,4 @@
+<%@page import="java.awt.print.Printable"%>
 <%@ page pageEncoding="UTF-8"%>
 <%@ include file="enTetePage.html"%>
 <%@ page import="commerce.catalogue.service.CatalogueManager"%>
@@ -99,8 +100,31 @@
 								</tr>
 							</tbody>
 						</table>
+						
+					
 
+<script>
+function $_GET(param) {
+	var vars = {};
+	window.location.href.replace( location.hash, '' ).replace( 
+		/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+		function( m, key, value ) { // callback
+			vars[key] = value !== undefined ? value : '';
+		}
+	);
 
+	if ( param ) {
+		return vars[param] ? vars[param] : null;	
+	}
+	return vars;
+}
+
+var name = $_GET('user1');
+var pre = $_GET('pre');
+var email = $_GET('email');
+var adr = $_GET('adr');
+var cp = $_GET('cp');
+</script>
 
 						<div id="paypal-button-container"></div>
 
@@ -157,6 +181,25 @@
 						</script>
 						
 					</div>
+					
+					<div class="affinfo" style="margin:20px;padding:10px;">
+						<label for="user">Username</label>
+						<span id="user"><h3><script>document.write(decodeURI(name));</script></h3></span>
+						
+						<label for="pre">Prenom</label>
+						<span id="pre"><h3><script>document.write(decodeURI(pre));</script></h3></span>
+						
+						<label for="email">Email</label>
+						<span id="email"><h3><script>document.write(decodeURI(email));</script></h3></span>
+						
+						<label for="adr">Adress</label>
+						<span id="adr"><h3><script>document.write(decodeURIComponent(adr));</script></h3></span>
+						
+						<label for="cp">Code postal</label>
+						<span id="cp"><h3><script>document.write(decodeURI(cp));</script></h3></span>
+						
+					</div>	
+					
 				</div>
 			</div>
 		</section>

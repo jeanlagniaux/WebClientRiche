@@ -20,40 +20,42 @@
 			for="tab-1" class="tab">Nouveau</label> <input id="tab-2"
 			type="radio" name="tab" class="for-pwd"><label for="tab-2"
 			class="tab">Deja Inscrit</label>
+			
 		<div class="login-form">
-		
+		<form action="controleCommande.jsp">
 			<div class="sign-in-htm">
 				<div class="group">
-					<label for="user" class="label">Prénom</label> <input id="user"
+					<label for="user" class="label">Prénom</label> <input id="user1" name="user1"
 						type="text" class="input">
+						
 				</div>
 				<div class="group">
 					<label for="user" class="label">Nom</label> <input id="user"
-						type="text" class="input">
+					name="pre"	type="text" class="input">
 				</div>
 				<div class="group">
-					<label for="user" class="label">Email</label> <input id="user"
+					<label for="user" class="label">Email</label> <input name="email" id="user"
 						type="text" class="input">
 				</div>
 				<div class="group">
 					<label for="user" class="label">Adresse</label> <input id="user"
-						type="text" class="input">
+						type="text" name="adr" class="input">
 				</div>
 				<div class="group">
 					<label for="user" class="label">Code Postal</label> <input id="user"
-						type="text" class="input">
+						type="text " name="cp" class="input">
 				</div>
+				
+
 				<div class="group">
 					<input type="submit" class="button" value="Passer au paiement" onclick="redirection()">
-					<script>
-					function redirection(){
-					window.location.href = "./controleCommande.jsp";
-					}					
-					</script>
+					
+ 			</form>
+					
 				</div>
-
 				<div class="hr"></div>
 			</div>
+			
 			
 			<div class="for-pwd-htm">
 				<div class="group">
@@ -61,10 +63,10 @@
 						id="user" type="text" class="input">
 				</div>
 				<div class="group">
-					<input type="submit" class="button" value="Passer au paiement" onclick="redirection()">
 				</div>
 				<div class="hr"></div>
 			</div>
+			
 		</div>
 	</div>
 </div>

@@ -10,116 +10,34 @@
 		response.sendRedirect("./index.jsp");
 	} else {
 		Panier lePanier = (Panier) session.getAttribute("panier");
-		CatalogueManager catalogueManager = (CatalogueManager) application
-				.getAttribute("catalogueManager");
+		CatalogueManager catalogueManager = (CatalogueManager) application.getAttribute("catalogueManager");
 %>
-<div id="content" class="col-full">
-	<div id="main-sidebar-container">
-		<section class="entry">
-			<div class="woocommerce">
-				<form
-					action="<%=response
-							.encodeURL("controlePanier.jsp?commande=recalculerPanier")%>"
-					name="panier" method="post">
-					<table class="shop_table cart" cellspacing="0">
-						<thead>
-							<tr>
-								<th class="product-remove"></th>
-								<th class="product-thumbnail"></th>
-								<th class="product-name">Produit</th>
-								<th class="product-price">Prix</th>
-								<th class="product-quantity">Quantité</th>
-								<th class="product-subtotal">Total</th>
-							</tr>
-						</thead>
-						<%
-							Iterator it;
-							Article unArticle;
-							it = lePanier.getLignesPanier().iterator();
-									LignePanier uneLignePanier;
-									while (it.hasNext()) {
-										uneLignePanier = (LignePanier) it.next();
-										unArticle = uneLignePanier.getArticle();
-						%>
-						<tbody>
-							<tr class="cart_item">
-								<td class="product-remove"><a class="remove"
-									title="Remove this item"
-									href="<%=response
-								.encodeURL("./controlePanier.jsp?refArticle="
-										+ uneLignePanier.getArticle()
-												.getRefArticle()
-										+ "&amp;commande=supprimerLigne")%>">×</a>
-								</td>
-								<td class="product-thumbnail"><img
-									class="attachment-shop_thumbnail wp-post-image" width="145"
-									height="145" alt="hoodie_4_front"
-									src="<% if (unArticle.getImage().startsWith("http")) 
-									    out.print(unArticle.getImage()) ;
-							        else
-							        	out.print("./images/"+unArticle.getImage()) ; %>"/></td>
-								<td class="product-name"><%=unArticle.getTitre()%></td>
-								<td class="product-price"><span class="amount"><%=uneLignePanier.getPrixUnitaire()%>€</span></td>
-								<td class="product-quantity">
-									<div class="quantity">
-										<input class="input-text qty text" type="number" size="4"
-											title="Qty" value="<%=uneLignePanier.getQuantite()%>"
-											name="cart[<%=uneLignePanier.getArticle().getRefArticle()%>][qty]"
-											min="1" step="1">
-									</div>
-								</td>
-								<td class="product-subtotal"><span class="amount"><%=uneLignePanier.getPrixTotal()%>€</span></td>
-							</tr>
-							<%
-								}
-							%>
-							<tr>
-								<td class="actions" colspan="6"><input class="button"
-									type="submit" value="Mise à jour du panier" name="update_cart" /></td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
-				<div class="cart-collaterals">
-					<div class="cross-sells"></div>
-					<div class="cart_totals ">
-						<h2>Total de la commande</h2>
-						<table cellspacing="0">
-							<tbody>
-								<tr class="cart-subtotal">
-									<th>Sous-total</th>
-									<td><span class="amount"><%=lePanier.getTotal()%>€</span></td>
-								</tr>
-								<tr class="shipping">
-									<th>Frait de port</th>
-									<td>Gratuit</td>
-								</tr>
-								<tr class="order-total">
-									<th>Total</th>
-									<td><strong> <span class="amount"><%=lePanier.getTotal()%>€</span>
-									</strong></td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="wc-proceed-to-checkout">
-							<a
-								href="<%=response
-							.encodeURL("./controleCommande.jsp?commande=effectuerCommander")%>"
-								class="checkout-button button alt wc-forward">Effectuer la
-								commande</a>
+<div class="all-wrapper">
+	<div class="ktba">
+		<h1>Votre panier est vide :(</h1>
+		<p>Retourner dans la boutique et rechercher l'article qui vous plaît afin de le commander</p>
+		
+		<div class="wrapperButtonControl">
+  							<button class='buton buton-saga'>
+    						<span><i class="fa fa-chevron-right"></i> retourner a la boutique </span>
+  							</button>
 						</div>
-						<div class="wc-proceed-to-checkout">
-							<a
-								href="<%=response
-							.encodeURL("./controlePanier.jsp?commande=viderPanier")%>"
-								class="checkout-button button alt">Vider le panier</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+						
+							<script>
+							$('.wrapperButtonControl').on('click', function() {
+								window.location.href = 'afficheRecherche.jsp';
+								
+							});
+						</script>
 	</div>
-</div>
+	<div class="mysearch">
+		<form id="form_id" action="<%=response.encodeURL("./search.jsp")%>"
+			method="get">
+			<input id="text_id" type="text" name="search"
+				placeholder="votre article " size="30" maxlength="10" /> <input
+				id="_submit_id" type="submit" value="Rechercher" />
+		</form>
+	</div>
 </div>
 <%
 	}
