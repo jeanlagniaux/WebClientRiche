@@ -38,7 +38,7 @@ public class LignePanier {
 		return quantite ;
 	}
 	public void recalculer() {
-		prixTotal = prixUnitaire * quantite;
+		prixTotal = Math.round(prixUnitaire * quantite * 100d ) / 100d;
 	}
 	public boolean equals(Object o) {
 		boolean retour = false ;

@@ -36,6 +36,19 @@ public class CatalogueManager {
 		}
 		return (article) ;
 	}
+	
+	public void supprimerToutLesArticles() {
+		try {
+			List articles = getArticles();
+			
+			for(int i = 0; i<articles.size(); i++) {
+				this.supprimerArticleParRef(((Article) articles.get(i)).getRefArticle());
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void supprimerArticleParRef(String inRefArticle) throws Exception {
 		Article article ;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession() ;

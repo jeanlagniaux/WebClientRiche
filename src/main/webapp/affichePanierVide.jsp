@@ -1,29 +1,45 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ include file="enTetePage.html"%>
-<nav id="navigation" class="col-full" role="navigation">
-	<ul id="main-nav" class="nav fl">
-		<li id="menu-item-290"
-			class="menu-item menu-item-type-custom menu-item-object-custom">
-			<a href="<%=response.encodeURL("./afficheRecherche.jsp")%>">Rechercher
-				un article</a>
-		</li>
-		<li id="menu-item-290"
-			class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item">
-			<a href="<%=response.encodeURL("./controlePanier.jsp")%>">Panier</a>
-		</li>
-	</ul>
-</nav>
-<div id="content" class="col-full">
-	<div id="main-sidebar-container">
-		<header>
-			<h1 class="title entry-title">Panier</h1>
-		</header>
-		<div class="woocommerce">
-			<section class="entry">
-				<p class="cart-empty">Votre panier est vide.</p>
-			</section>
-		</div>
+<%@ page import="commerce.catalogue.service.CatalogueManager"%>
+<%@ page import="commerce.catalogue.domaine.modele.Article"%>
+<%@ page import="commerce.gestion.Panier"%>
+<%@ page import="commerce.gestion.LignePanier"%>
+<%@ page import="java.util.Iterator"%>
+<%
+	if (session.getAttribute("panier") == null) {
+		response.sendRedirect("./index.jsp");
+	} else {
+		Panier lePanier = (Panier) session.getAttribute("panier");
+		CatalogueManager catalogueManager = (CatalogueManager) application.getAttribute("catalogueManager");
+%>
+<div class="all-wrapper">
+	<div class="ktba">
+		<h1>Votre panier est vide :(</h1>
+		<p>Retourner dans la boutique et rechercher l'article qui vous plaît afin de le commander</p>
+		
+		<div class="wrapperButtonControl">
+  							<button class='buton buton-saga'>
+    						<span><i class="fa fa-chevron-right"></i> retourner a la boutique </span>
+  							</button>
+						</div>
+						
+							<script>
+							$('.wrapperButtonControl').on('click', function() {
+								window.location.href = 'afficheRecherche.jsp';
+								
+							});
+						</script>
+	</div>
+	<div class="mysearch">
+		<form id="form_id" action="<%=response.encodeURL("./search.jsp")%>"
+			method="get">
+			<input id="text_id" type="text" name="search"
+				placeholder="votre article " size="30" maxlength="10" /> <input
+				id="_submit_id" type="submit" value="Rechercher" />
+		</form>
 	</div>
 </div>
-<%@ include file='piedDePage.html'%>
-
+<%
+	}
+%>
+<%@ include file="piedDePage.html"%>

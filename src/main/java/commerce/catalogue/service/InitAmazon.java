@@ -39,11 +39,19 @@ public class InitAmazon {
 
 	private CatalogueManager catalogueManager ;
 
+	private String keywords;
+		
 	public InitAmazon(CatalogueManager catalogueManager) {
 		this.catalogueManager = catalogueManager ;
 	}
+	
+	public InitAmazon(CatalogueManager catalogueManager, String keywords) {
+		this.catalogueManager = catalogueManager ;
+		this.keywords = keywords;
+	}
 
 	public void init() {
+		
 		// Lien pour obtenir la clé d'accès et la clé secrète auprès d'Amazon.
 		// https://portal.aws.amazon.com/gp/aws/securityCredentials
 		/*
@@ -57,6 +65,7 @@ public class InitAmazon {
 		 *      JP: ecs.amazonaws.jp
 		 */
 		//String ENDPOINT = "ecs.amazonaws.fr" ; 
+		
 		String ENDPOINT = "odp.tuxfamily.org";
 		String AWS_ACCESS_KEY_ID = "YOUR_ACCESS_KEY_ID_HERE";
 		String AWS_SECRET_KEY = "YOUR_SECRET_KEY_HERE";
@@ -72,7 +81,7 @@ public class InitAmazon {
 		Search search = new Search();
 		search.setCategory("Music");
 		search.setResponseGroup("Offers,ItemAttributes,Images") ;
-		String keywords = "Ibrahim Maalouf" ;
+		//String keywords = "Booba" ;
 		search.setKeywords(keywords);
 
 		Livre livre ;
@@ -203,4 +212,5 @@ public class InitAmazon {
 			e.printStackTrace() ;
 		}
 	}
+	
 }

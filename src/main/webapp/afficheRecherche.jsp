@@ -8,35 +8,38 @@
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.List"%>
 <%
+
 	if (session.getAttribute("panier")==null) {
 		response.sendRedirect("./index.jsp");
 	} else {
 		CatalogueManager catalogueManager = (CatalogueManager) application
 									.getAttribute("catalogueManager");
+		
 		List<Article> articles = catalogueManager.getArticles();
 		Iterator<Article> listeDesArticles ;
 		Livre livre = null;
 		Musique musique = null;
 		Article article;
+		String result = "Resultat de la recherche ";
+		if( articles.size() == 0)
+			result = "Aucun Resultat Trouve";
 %>
-<nav id="navigation" class="col-full" role="navigation">
-	<ul id="main-nav" class="nav fl">
-		<li id="menu-item-290"
-			class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item">
-			<a href="<%=response.encodeURL("./afficheRecherche.jsp")%>">Rechercher
-				un article</a>
-		</li>
-		<li id="menu-item-290"
-			class="menu-item menu-item-type-custom menu-item-object-custom">
-			<a href="<%=response.encodeURL("./controlePanier.jsp")%>">Panier</a>
-		</li>
-	</ul>
-</nav>
+
+<div class="mysearch">
+
+	 <form id="form_id" action="<%=response.encodeURL("./search.jsp")%>" method="get"> 
+			 <input id="text_id" type="text" name="search" placeholder="votre article " size="30" maxlength="10" />
+			 <input id="_submit_id" type="submit" value="Rechercher" /></form>
+
+</div>
+	
+			
+		
 <div id="content" class="site-content" tabindex="-1">
 	<div class="col-full">
 		<div class="primary" class="content-area">
 			<section id="main" class="site-main" role="main">
-				<h1 class="page-title">Résultats de la recherche</h1>
+				<h1 class="page-title"><%=result %></h1>
 				<ul class="products">
 					<%
 							listeDesArticles = articles.iterator() ;
@@ -94,6 +97,8 @@
 								</div>
 							</div>
 						</div> 
+						
+					
 <%
                             		}
                             	}
