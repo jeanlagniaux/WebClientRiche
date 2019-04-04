@@ -121,8 +121,8 @@ function $_GET(param) {
 
 var name = $_GET('user1');
 var pre = $_GET('pre');
-var email = $_GET('email');
-var adr = $_GET('adr');
+var email = encodeURI($_GET('email'));
+var adr = encodeURI($_GET('adr'));
 var cp = $_GET('cp');
 </script>
 
@@ -190,10 +190,15 @@ var cp = $_GET('cp');
 						<span id="pre"><h3><script>document.write(decodeURI(pre));</script></h3></span>
 						
 						<label for="email">Email</label>
-						<span id="email"><h3><script>document.write(decodeURI(email));</script></h3></span>
+						<span id="email"><h3><script>
+						var coemail = email.replace("%", "@");
+						document.write(coemail);</script></h3></span>
 						
-						<label for="adr">Adress</label>
-						<span id="adr"><h3><script>document.write(decodeURIComponent(adr));</script></h3></span>
+						<label for="adr">Adresse</label>
+						<span id="adr"><h3><script>
+						var coadr = adr.replace("+", " ");
+						document.write(coadr);</script></h3></span>
+						
 						
 						<label for="cp">Code postal</label>
 						<span id="cp"><h3><script>document.write(decodeURI(cp));</script></h3></span>
